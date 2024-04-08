@@ -18,7 +18,10 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="IMG/logo_zeonic-removebg-preview.png" height="80px" width="100px" alt=""></a>
         <a class="navbar-brand" href="#">Taller Mecánico</a>
+        <!-- Cantidad de mantenimientos ingresados -->
+        <span id="mantenimientosCount" class="navbar-text mr-auto d-none">Cantidad de mantenimientos ingresados: <span id="cantidadMantenimientos">0</span></span>
         <!-- Login y registro en la parte derecha del Navbar -->
         <ul id="navbarItems" class="navbar-nav ml-auto">
             <li id="loginNavItem" class="nav-item">
@@ -66,11 +69,6 @@
         <div class="mt-4">
             <input type="text" id="searchInput" placeholder="Buscar por nombre del mecánico o palabra clave">
             <button onclick="search()">Buscar</button>
-        </div>
-
-        <!-- Cantidad de mantenimientos -->
-        <div class="mt-4">
-            <p>Cantidad de mantenimientos ingresados: <span id="cantidadMantenimientos">0</span></p>
         </div>
 
         <!-- Formulario de contacto -->
@@ -121,6 +119,8 @@
             document.getElementById('loginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>';
             // Ocultar el enlace de registro
             document.getElementById('registerNavItem').style.display = 'none';
+            // Mostrar la cantidad de mantenimientos ingresados
+            document.getElementById('mantenimientosCount').classList.remove('d-none');
         }
 
         // Función para registrarse
@@ -140,6 +140,8 @@
             logoutNavItem.className = 'nav-item';
             logoutNavItem.innerHTML = '<a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>';
             document.getElementById('navbarItems').parentNode.appendChild(logoutNavItem);
+            // Mostrar la cantidad de mantenimientos ingresados
+            document.getElementById('mantenimientosCount').classList.remove('d-none');
         }
 
         // Función para cerrar sesión
@@ -148,6 +150,8 @@
             document.getElementById('registerNavItem').style.display = 'block';
             // Restaurar el texto y evento onclick del enlace de inicio de sesión
             document.getElementById('loginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="login()">Iniciar sesión</a>';
+            // Ocultar la cantidad de mantenimientos ingresados
+            document.getElementById('mantenimientosCount').classList.add('d-none');
         }
         // Función para agregar nueva atención
         function addNewAttention() {
