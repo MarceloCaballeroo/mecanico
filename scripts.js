@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    // Verifica el estado de la sesión al cargar la página y ajusta la UI de acuerdo a este
+    // Inicialmente verifica el estado de sesión
     checkLoginStatus();
 
-    // Manejo del clic en el enlace de inicio de sesión/cierre de sesión
-    $('#loginNavItem a').on('click', function(e) {
+    // Manejador de eventos para "Iniciar sesión" o "Cerrar sesión"
+    $(document).on('click', '#actionLogin', function(e) {
         e.preventDefault();
         if (localStorage.getItem('isLoggedIn') === 'true') {
             logout();
@@ -12,46 +12,45 @@ $(document).ready(function() {
         }
     });
 
+    // Opcionalmente, maneja el registro aquí si es necesario
+    $(document).on('click', '#actionRegister', function(e) {
+        e.preventDefault();
+        register();
+    });
+
     function checkLoginStatus() {
         if (localStorage.getItem('isLoggedIn') === 'true') {
-            $('#loginNavItem a').text('Cerrar sesión');
-            $('#registerNavItem').hide();
-            $('#mantenimientosCount').removeClass('d-none');
-
-            // Verifica si el usuario es administrador
-            if (localStorage.getItem('isAdmin') === 'true') {
-                $('#adminIndicator').text('Admin').show();
-            } else {
-                $('#adminIndicator').hide();
-            }
+            $('#actionLogin').text('Cerrar sesión'); // Cambia el texto para reflejar el estado de "Cerrar sesión"
+            $('#actionRegister').hide(); // Oculta la opción de registro
+            // Aquí, agregar lógica adicional si el usuario es un administrador
         } else {
-            $('#loginNavItem a').text('Iniciar sesión');
-            $('#registerNavItem').show();
-            $('#mantenimientosCount').addClass('d-none');
-            $('#adminIndicator').hide();
+            $('#actionLogin').text('Iniciar sesión'); // Asegura que el texto sea "Iniciar sesión"
+            $('#actionRegister').show(); // Muestra la opción de registro
         }
     }
 
     function login() {
-        const email = prompt('Ingrese su correo electrónico:');
-        const password = prompt('Ingrese su contraseña:');
-        if (email === "admin" && password === "123") {
+        // Aquí iría tu lógica de autenticación. Por ahora, solo simularemos el inicio de sesión.
+        const email = prompt("Ingrese su correo electrónico:");
+        const password = prompt("Ingrese su contraseña:");
+        // Simula una comprobación de credenciales
+        if (email && password) { // Simula una validación exitosa
             localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('isAdmin', 'true');
-            checkLoginStatus();
-            alert('Inicio de sesión exitoso como administrador.');
+            alert("Inicio de sesión exitoso.");
         } else {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.removeItem('isAdmin');
-            checkLoginStatus();
-            alert('Inicio de sesión exitoso.');
+            alert("Inicio de sesión fallido.");
         }
+        checkLoginStatus();
     }
 
     function logout() {
         localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('isAdmin');
+        alert("Cierre de sesión exitoso.");
         checkLoginStatus();
-        alert('Cierre de sesión exitoso.');
+    }
+
+    function register() {
+        // Aquí iría tu lógica de registro.
+        alert("Registro (simulado para este ejemplo).");
     }
 });

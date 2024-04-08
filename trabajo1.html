@@ -10,29 +10,30 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Taller Mecánico</a>
-        <!-- Cantidad de mantenimientos ingresados -->
-        <span id="adminIndicator" class="navbar-text mr-auto" style="display: none;">Admin</span>
-        <span id="mantenimientosCount" class="navbar-text mr-auto d-none">Cantidad de mantenimientos ingresados: <span id="cantidadMantenimientos">0</span></span>
-        <ul id="navbarItems" class="navbar-nav ml-auto">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #343a40;">
+        <!-- Logo e hipervínculo al inicio -->
+        <a class="navbar-brand" href="index.html">
+          <img src="IMG/logo_zeonic-removebg-preview.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          Taller Zeonic
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
             <!-- Enlace para volver al inicio, visible solo en páginas que no son index.html -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">Volver al Inicio</a>
+              <a class="nav-link" href="index.html">Volver al Inicio</a>
             </li>
             <!-- Enlace a Modelos -->
-            <li id="modelsNavItem" class="nav-item">
-                <a class="nav-link" href="cards.html">Modelos</a>
+            <li class="nav-item">
+              <a class="nav-link" href="cards.html">Modelos</a>
             </li>
-            <!-- Los enlaces de Iniciar sesión/Registrarse/Admin se gestionan con scripts.js -->
-            <li id="loginNavItem" class="nav-item">
-                <a class="nav-link" href="#" data-action="login">Iniciar sesión</a>
-            </li>
-            <li id="registerNavItem" class="nav-item">
-                <a class="nav-link" href="#" data-action="register">Registrarse</a>
-            </li>
-        </ul>
-    </nav>
+            <!-- Otros elementos del navbar -->
+          </ul>
+        </div>
+      </nav>
     <div class="container - fluid">
         <div class="row text-center">
             <div class="col-md-6">
@@ -73,5 +74,7 @@
         crossorigin="anonymous"></script>
     <script src="scripts.js"></script>
 </body>
-
+<footer class="bg-dark text-white mt-5 py-4 text-center">
+    Taller Mecánico © 2024. Todos los derechos reservados.
+</footer>
 </html>
