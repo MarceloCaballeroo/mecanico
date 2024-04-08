@@ -18,11 +18,11 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="IMG/logo_zeonic-removebg-preview.png" height="80px" width="100px" alt=""></a>
         <a class="navbar-brand" href="#">Taller Mecánico</a>
         <!-- Cantidad de mantenimientos ingresados -->
-        <span id="mantenimientosCount" class="navbar-text mr-auto d-none">Cantidad de mantenimientos ingresados: <span id="cantidadMantenimientos">0</span></span>
-        <!-- Login y registro en la parte derecha del Navbar -->
+        <span id="mantenimientosCount" class="navbar-text mr-auto d-none">Cantidad de mantenimientos ingresados: <span
+                id="cantidadMantenimientos">0</span></span>
+        <!-- Login, logout y login de admin -->
         <ul id="navbarItems" class="navbar-nav ml-auto">
             <li id="loginNavItem" class="nav-item">
                 <a class="nav-link" href="#" onclick="login()">Iniciar sesión</a>
@@ -41,13 +41,13 @@
             <div class="carousel-item active">
               <img src="IMG/trabajo1.jpg" class="d-block w-100" alt="Trabajo 1">
               <div class="carousel-caption d-none d-md-block">
-                <h5>MS-18SH</h5>
+                <h5>Trabajo 1</h5>
               </div>
             </div>
             <div class="carousel-item">
               <img src="IMG/char_auto.png" class="d-block w-100" alt="Trabajo 2">
               <div class="carousel-caption d-none d-md-block">
-                <h5>MS-185H-CAO2</h5>
+                <h5>Trabajo 2</h5>
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -60,113 +60,137 @@
             </a>
         </div>
 
-        <!-- Detalle del trabajo -->
-        <div id="detalleTrabajo" class="mt-4">
-            <!-- Aquí se mostrará el detalle del trabajo seleccionado -->
+            <!-- Detalle del trabajo -->
+            <div id="detalleTrabajo" class="mt-4">
+                <!-- Aquí se mostrará el detalle del trabajo seleccionado -->
+            </div>
+
+            <!-- Búsqueda y filtro -->
+            <div class="mt-4">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre del mecánico o palabra clave">
+                <button onclick="search()">Buscar</button>
+            </div>
+
+            <!-- Formulario de contacto -->
+            <div class="mt-4">
+                <h3>Formulario de Contacto</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo electrónico</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Ingrese su email">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </div>
+
+            <!-- Atenciones por categoría o mecánico -->
+            <div class="mt-4">
+                <h3>Atenciones por categoría o mecánico</h3>
+                <!-- Aquí se mostrarán las atenciones por categoría o mecánico -->
+            </div>
+            <!-- Agregar nueva atención -->
+            <div class="mt-4">
+                <h3>Agregar nueva atención</h3>
+                <button onclick="addNewAttention()">Agregar atención</button>
+            </div>
         </div>
 
-        <!-- Búsqueda y filtro -->
-        <div class="mt-4">
-            <input type="text" id="searchInput" placeholder="Buscar por nombre del mecánico o palabra clave">
-            <button onclick="search()">Buscar</button>
-        </div>
+        <script>
+            function search() {
+                var input = document.getElementById('searchInput').value;
+                // Aquí puedes implementar la lógica de búsqueda
+                console.log('Búsqueda:', input);
+            }
 
-        <!-- Formulario de contacto -->
-        <div class="mt-4">
-            <h3>Formulario de Contacto</h3>
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Correo electrónico</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Ingrese su email">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form>
-        </div>
+            // Función para iniciar sesión
+            function login() {
+                var email = prompt('Ingrese su correo electrónico:');
+                var password = prompt('Ingrese su contraseña:');
+                // Aquí puedes implementar la lógica de inicio de sesión
+                console.log('Email:', email);
+                console.log('Contraseña:', password);
+                alert('Hola, nuevo usuario');
+                // Cambiar el texto del enlace y el evento onclick
+                document.getElementById('loginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>';
+                // Ocultar el enlace de registro
+                document.getElementById('registerNavItem').style.display = 'none';
+                // Mostrar la cantidad de mantenimientos ingresados
+                document.getElementById('mantenimientosCount').classList.remove('d-none');
+            }
 
-        <!-- Atenciones por categoría o mecánico -->
-        <div class="mt-4">
-            <h3>Atenciones por categoría o mecánico</h3>
-            <!-- Aquí se mostrarán las atenciones por categoría o mecánico -->
-        </div>
-        <!-- Agregar nueva atención -->
-        <div class="mt-4">
-            <h3>Agregar nueva atención</h3>
-            <button onclick="addNewAttention()">Agregar atención</button>
-        </div>
-    </div>
+            // Función para iniciar sesión como administrador
+            function adminLogin() {
+                var adminPassword = prompt('Ingrese la contraseña de administrador:');
+                if (adminPassword === '123') {
+                    alert('Bienvenido, administrador');
+                    // Cambiar el texto y evento onclick del enlace de administrador
+                    document.getElementById('adminLoginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="adminLogout()">Logout Admin</a>';
+                } else {
+                    alert('Tu no eres un papu de papus');
+                }
+            }
 
-    <script>
-        function search() {
-            var input = document.getElementById('searchInput').value;
-            // Aquí puedes implementar la lógica de búsqueda
-            console.log('Búsqueda:', input);
-        }
+            // Función para cerrar sesión
+            function logout() {
+                // Restaurar el enlace de "Login Admin"
+                document.getElementById('adminLoginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="adminLogin()">Login Admin</a>';
+                // Restaurar el texto y evento onclick del enlace de inicio de sesión
+                document.getElementById('loginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="login()">Iniciar sesión</a>';
+                // Ocultar la cantidad de mantenimientos ingresados
+                document.getElementById('mantenimientosCount').classList.add('d-none');
+                // Mostrar el enlace de registro
+                document.getElementById('registerNavItem').style.display = 'block';
+            }
 
-        // Función para iniciar sesión
-        function login() {
-            var email = prompt('Ingrese su correo electrónico:');
-            var password = prompt('Ingrese su contraseña:');
-            // Aquí puedes implementar la lógica de inicio de sesión
-            console.log('Email:', email);
-            console.log('Contraseña:', password);
-            alert('Hola, nuevo usuario');
-            // Cambiar el texto del enlace y el evento onclick
-            document.getElementById('loginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>';
-            // Ocultar el enlace de registro
-            document.getElementById('registerNavItem').style.display = 'none';
-            // Mostrar la cantidad de mantenimientos ingresados
-            document.getElementById('mantenimientosCount').classList.remove('d-none');
-        }
+            // Función para cerrar sesión como administrador
+            function adminLogout() {
+                // Restaurar el enlace de "Login Admin"
+                document.getElementById('adminLoginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="adminLogin()">Login Admin</a>';
+                // Ejecutar la función de logout para limpiar cualquier estado de sesión de administrador
+                logout();
+            }
 
-        // Función para registrarse
-        function register() {
-            var email = prompt('Ingrese su correo electrónico:');
-            var name = prompt('Ingrese su nombre:');
-            var password = prompt('Ingrese su contraseña:');
-            // Aquí puedes implementar la lógica de registro
-            console.log('Email:', email);
-            console.log('Nombre:', name);
-            console.log('Contraseña:', password);
-            alert('Hola, nuevo usuario');
-            // Ocultar elementos de inicio de sesión y registro
-            document.getElementById('navbarItems').style.display = 'none';
-            // Mostrar enlace de Cerrar sesión
-            var logoutNavItem = document.createElement('li');
-            logoutNavItem.className = 'nav-item';
-            logoutNavItem.innerHTML = '<a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>';
-            document.getElementById('navbarItems').parentNode.appendChild(logoutNavItem);
-            // Mostrar la cantidad de mantenimientos ingresados
-            document.getElementById('mantenimientosCount').classList.remove('d-none');
-        }
+            // Función para registrarse
+            function register() {
+                var email = prompt('Ingrese su correo electrónico:');
+                var name = prompt('Ingrese su nombre:');
+                var password = prompt('Ingrese su contraseña:');
+                // Aquí puedes implementar la lógica de registro
+                console.log('Email:', email);
+                console.log('Nombre:', name);
+                console.log('Contraseña:', password);
+                alert('Hola, nuevo usuario');
+                // Ocultar elementos de inicio de sesión y registro
+                document.getElementById('navbarItems').style.display = 'none';
+                // Mostrar enlace de Cerrar sesión
+                var logoutNavItem = document.createElement('li');
+                logoutNavItem.className = 'nav-item';
+                logoutNavItem.innerHTML = '<a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a>';
+                document.getElementById('navbarItems').parentNode.appendChild(logoutNavItem);
+                // Mostrar la cantidad de mantenimientos ingresados
+                document.getElementById('mantenimientosCount').classList.remove('d-none');
+            }
 
-        // Función para cerrar sesión
-        function logout() {
-            // Mostrar el enlace de registro
-            document.getElementById('registerNavItem').style.display = 'block';
-            // Restaurar el texto y evento onclick del enlace de inicio de sesión
-            document.getElementById('loginNavItem').innerHTML = '<a class="nav-link" href="#" onclick="login()">Iniciar sesión</a>';
-            // Ocultar la cantidad de mantenimientos ingresados
-            document.getElementById('mantenimientosCount').classList.add('d-none');
-        }
-        // Función para agregar nueva atención
-        function addNewAttention() {
-            var mechanic = prompt('Ingrese el nombre del mecánico:');
-            var diagnosis = prompt('Ingrese el diagnóstico:');
-            var date = prompt('Ingrese la fecha:');
-            var materials = prompt('Ingrese el listado de materiales:');
-            var images = prompt('Ingrese las imágenes:');
-            // Aquí puedes implementar la lógica para agregar una nueva atención
-            console.log('Mecánico:', mechanic);
-            console.log('Diagnóstico:', diagnosis);
-            console.log('Fecha:', date);
-            console.log('Materiales:', materials);
-            console.log('Imágenes:', images);
-        }
-    </script>
-</body>
+            // Función para agregar nueva atención
+            function addNewAttention() {
+                var mechanic = prompt('Ingrese el nombre del mecánico:');
+                var diagnosis = prompt('Ingrese el diagnóstico:');
+                var date = prompt('Ingrese la fecha:');
+                var materials = prompt('Ingrese el listado de materiales:');
+                var images = prompt('Ingrese las imágenes:');
+                // Aquí puedes implementar la lógica para agregar una nueva atención
+                console.log('Mecánico:', mechanic);
+                console.log('Diagnóstico:', diagnosis);
+                console.log('Fecha:', date);
+                console.log('Materiales:', materials);
+                console.log('Imágenes:', images);
+            }
+        </script>
+
+
 </html>
