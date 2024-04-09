@@ -77,4 +77,12 @@ $(document).ready(function() {
         // Aquí iría la lógica de registro, como guardar datos en localStorage o enviarlos a un servidor
         alert("Registro completado (simulado). Por favor, inicie sesión.");
     }
+
+    function actualizarContadorMantenciones() {
+        var cantidadMantenciones = localStorage.getItem('cantidadMantenciones');
+        $('#mantencionesContador').text(cantidadMantenciones || 0);
+    }
+
+    // Inicializar el contador al cargar la página
+    actualizarContadorMantenciones();
 });
