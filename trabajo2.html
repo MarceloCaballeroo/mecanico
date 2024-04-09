@@ -7,35 +7,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rayo Mcqueen</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <!-- Asegúrate de que la ruta a jQuery sea correcta -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #343a40;">
-        <!-- Logo e hipervínculo al inicio -->
-        <a class="navbar-brand" href="index.html">
-          <img src="IMG/logo_zeonic-removebg-preview.png" width="30" height="30" class="d-inline-block align-top" alt="">
-          Taller Zeonic
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <!-- Enlace para volver al inicio, visible solo en páginas que no son index.html -->
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Volver al Inicio</a>
-            </li>
-            <!-- Enlace a Modelos -->
-            <li class="nav-item">
-              <a class="nav-link" href="cards.html">Modelos</a>
-            </li>
-            <!-- Otros elementos del navbar -->
-          </ul>
-        </div>
-      </nav>
+    <div id="navbar-placeholder"></div>
+
+<script>
+$(function() {
+    // Carga la navbar de navbar.html en el div #navbar-placeholder
+    $("#navbar-placeholder").load("navbar.html", function(response, status, xhr) {
+        if (status == "error") {
+            var msg = "Sorry but there was an error: ";
+            console.log(msg + xhr.status + " " + xhr.statusText);
+        }
+    });
+});
+</script>
     <div class="container - fluid">
         <div class="row text-center">
             <div class="col-md-6">

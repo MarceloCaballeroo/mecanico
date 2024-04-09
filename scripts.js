@@ -1,56 +1,80 @@
 $(document).ready(function() {
-    // Inicialmente verifica el estado de sesión
-    checkLoginStatus();
-
-    // Manejador de eventos para "Iniciar sesión" o "Cerrar sesión"
-    $(document).on('click', '#actionLogin', function(e) {
-        e.preventDefault();
-        if (localStorage.getItem('isLoggedIn') === 'true') {
-            logout();
-        } else {
+    // Asigna eventos después de cargar la navbar dinámicamente
+    function assignNavbarEvents() {
+        $('#actionLogin').off('click').on('click', function(e) {
+            e.preventDefault();
             login();
-        }
-    });
+        });
 
-    // Opcionalmente, maneja el registro aquí si es necesario
-    $(document).on('click', '#actionRegister', function(e) {
-        e.preventDefault();
-        register();
-    });
+        $('#actionLogout').off('click').on('click', function(e) {
+            e.preventDefault();
+            logout();
+        });
 
+        $('#actionRegister').off('click').on('click', function(e) {
+            e.preventDefault();
+            register();
+        });
+    }
+
+    // Verifica el estado de inicio de sesión y ajusta la UI correspondientemente
     function checkLoginStatus() {
-        if (localStorage.getItem('isLoggedIn') === 'true') {
-            $('#actionLogin').text('Cerrar sesión'); // Cambia el texto para reflejar el estado de "Cerrar sesión"
-            $('#actionRegister').hide(); // Oculta la opción de registro
-            // Aquí, agregar lógica adicional si el usuario es un administrador
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const isAdmin = localStorage.getItem('isAdmin') === 'true';
+        
+        if (isLoggedIn) {
+            $('#actionLogin').hide();
+            $('#actionLogout').show();
+            $('#actionRegister').hide();
         } else {
-            $('#actionLogin').text('Iniciar sesión'); // Asegura que el texto sea "Iniciar sesión"
-            $('#actionRegister').show(); // Muestra la opción de registro
+            $('#actionLogin').show();
+            $('#actionLogout').hide();
+            $('#actionRegister').show();
+        }
+
+        if (isAdmin) {
+            // Opciones específicas del administrador
+            console.log("El modo de administrador está activado.");
         }
     }
 
+    // Cargar la navbar y luego aplicar la lógica de visibilidad
+    $("#navbar-placeholder").load("navbar.html", function() {
+        assignNavbarEvents();
+        checkLoginStatus();
+    });
+
+    // Lógica de inicio de sesión
     function login() {
-        // Aquí iría tu lógica de autenticación. Por ahora, solo simularemos el inicio de sesión.
         const email = prompt("Ingrese su correo electrónico:");
         const password = prompt("Ingrese su contraseña:");
-        // Simula una comprobación de credenciales
-        if (email && password) { // Simula una validación exitosa
+        
+        // Simula la lógica de autenticación
+        if (email === "admin" && password === "123") {
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('isAdmin', 'true');
+            alert("Inicio de sesión como Administrador exitoso.");
+        } else if (email && password) {
             localStorage.setItem('isLoggedIn', 'true');
             alert("Inicio de sesión exitoso.");
         } else {
-            alert("Inicio de sesión fallido.");
+            alert("Inicio de sesión fallido. Por favor, intente de nuevo.");
         }
         checkLoginStatus();
     }
 
+    // Lógica de cierre de sesión
     function logout() {
         localStorage.removeItem('isLoggedIn');
-        alert("Cierre de sesión exitoso.");
+        localStorage.removeItem('isAdmin');
+        alert("Sesión cerrada exitosamente.");
         checkLoginStatus();
     }
 
+    // Lógica de registro (ejemplo simplificado)
     function register() {
-        // Aquí iría tu lógica de registro.
-        alert("Registro (simulado para este ejemplo).");
+        const email = prompt("Ingrese su correo electrónico para registrarse:");
+        // Aquí iría la lógica de registro, como guardar datos en localStorage o enviarlos a un servidor
+        alert("Registro completado (simulado). Por favor, inicie sesión.");
     }
 });
