@@ -85,4 +85,18 @@ $(document).ready(function() {
 
     // Inicializar el contador al cargar la página
     actualizarContadorMantenciones();
+
+    function buscarAutosPorMecanico(searchTerm) {
+        $('.auto-item').hide();  // Oculta todos los elementos primero
+        $('.auto-item').filter(function() {
+            var mecanico = $(this).data('mecanico').toLowerCase();
+            return mecanico.includes(searchTerm.toLowerCase());
+        }).show();  // Muestra solo los elementos que coinciden con el término de búsqueda
+    }
+
+    // Manejador de eventos para el botón de búsqueda
+    $('#searchButton').on('click', function() {
+        var searchTerm = $('#searchInput').val().trim();
+        buscarAutosPorMecanico(searchTerm);
+    });
 });
