@@ -1,17 +1,17 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Asigna eventos después de cargar la navbar dinámicamente
     function assignNavbarEvents() {
-        $('#actionLogin').off('click').on('click', function(e) {
+        $('#actionLogin').off('click').on('click', function (e) {
             e.preventDefault();
             login();
         });
 
-        $('#actionLogout').off('click').on('click', function(e) {
+        $('#actionLogout').off('click').on('click', function (e) {
             e.preventDefault();
             logout();
         });
 
-        $('#actionRegister').off('click').on('click', function(e) {
+        $('#actionRegister').off('click').on('click', function (e) {
             e.preventDefault();
             register();
         });
@@ -21,14 +21,14 @@ $(document).ready(function() {
     function checkLoginStatus() {
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
         const isAdmin = localStorage.getItem('isAdmin') === 'true';
-        
+
         if (isLoggedIn) {
             $('#actionLogin').hide();
-            $('#actionLogout').show();
+            $('#actionLogout').show().text(isAdmin ? 'Cerrar sesión (admin)' : 'Cerrar sesión'); // Modificación aquí
             $('#actionRegister').hide();
         } else {
             $('#actionLogin').show();
-            $('#actionLogout').hide();
+            $('#actionLogout').hide().text('Cerrar sesión'); // Asegurar que el texto vuelva a la normalidad
             $('#actionRegister').show();
         }
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
     }
 
     // Cargar la navbar y luego aplicar la lógica de visibilidad
-    $("#navbar-placeholder").load("navbar.html", function() {
+    $("#navbar-placeholder").load("navbar.html", function () {
         assignNavbarEvents();
         checkLoginStatus();
     });
@@ -48,7 +48,7 @@ $(document).ready(function() {
     function login() {
         const email = prompt("Ingrese su correo electrónico:");
         const password = prompt("Ingrese su contraseña:");
-        
+
         // Simula la lógica de autenticación
         if (email === "admin" && password === "123") {
             localStorage.setItem('isLoggedIn', 'true');
@@ -88,14 +88,14 @@ $(document).ready(function() {
 
     function buscarAutosPorMecanico(searchTerm) {
         $('.auto-item').hide();  // Oculta todos los elementos primero
-        $('.auto-item').filter(function() {
+        $('.auto-item').filter(function () {
             var mecanico = $(this).data('mecanico').toLowerCase();
             return mecanico.includes(searchTerm.toLowerCase());
         }).show();  // Muestra solo los elementos que coinciden con el término de búsqueda
     }
 
     // Manejador de eventos para el botón de búsqueda
-    $('#searchButton').on('click', function() {
+    $('#searchButton').on('click', function () {
         var searchTerm = $('#searchInput').val().trim();
         buscarAutosPorMecanico(searchTerm);
     });
