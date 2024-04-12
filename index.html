@@ -112,6 +112,7 @@
                                 <div class="form-group">
                                     <label for="contactName">Nombre</label>
                                     <input type="text" class="form-control" id="contactName" placeholder="Ingresa tu nombre">
+                                    <div id="nameError" class="text-danger"></div> <!-- Mostrará un mensaje de error si el nombre es inválido -->
                                 </div>
                                 <div class="form-group">
                                     <label for="contactEmail">Correo Electrónico</label>
@@ -147,18 +148,34 @@
                             
                             <script>
                                 function submitForm() {
-                                    // Obtener el valor del correo electrónico ingresado por el usuario
+                                    // Obtener el valor del nombre y del correo electrónico ingresados por el usuario
+                                    var name = document.getElementById("contactName").value;
                                     var email = document.getElementById("contactEmail").value;
-                            
+        
+                                    // Verificar si el nombre está en blanco
+                                    if (name.trim() === "") {
+                                        document.getElementById("nameError").innerText = "Por favor ingresa tu nombre.";
+                                        return;
+                                    } else {
+                                        document.getElementById("nameError").innerText = ""; // Limpiar el mensaje de error si el nombre es válido
+                                    }
+        
+                                    // Verificar si el nombre es un número
+                                    if (!isNaN(parseFloat(name)) && isFinite(name)) {
+                                        document.getElementById("nameError").innerText = "El nombre no puede ser un número.";
+                                        return;
+                                    } else {
+                                        document.getElementById("nameError").innerText = ""; // Limpiar el mensaje de error si el nombre es válido
+                                    }
+        
                                     // Verificar si el correo electrónico es válido
                                     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                     if (!emailRegex.test(email)) {
-                                        // Si el correo electrónico no es válido, mostrar un mensaje de error
                                         document.getElementById("emailError").innerText = "Por favor ingresa un correo electrónico válido.";
                                         return;
                                     }
-                            
-                                    // Si el correo electrónico es válido, mostrar el modal de registro enviado
+        
+                                    // Si todas las validaciones pasan, mostrar el modal de registro enviado
                                     $('#exampleModal').modal('show');
                                 }
                             </script>
@@ -167,6 +184,7 @@
                 </div>
             </div>
         </div>
+        
 
         <!-- Contador de Mantenciones -->
         <div class="container mt-3">
