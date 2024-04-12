@@ -120,7 +120,7 @@
                                     <textarea class="form-control" id="contactMessage" rows="3"
                                         placeholder="Escribe tu mensaje aquí"></textarea>
                                 </div>
-                                    <!-- Button activador modal -->
+                                    <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                         Enviar registro 
                                     </button>
@@ -130,21 +130,39 @@
                                         <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                                                <h5 class="modal-title" id="exampleModalLabel">Registro Enviado</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
                                             <div class="modal-body">
-                                            Registro enviado
+                                                Tu registro ha sido enviado correctamente.
                                             </div>
                                             <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
+                                </div>
+                                
+                                <script>
+                                    function submitForm() {
+                                        // Obtener el valor del correo electrónico ingresado por el usuario
+                                        var email = document.getElementById("contactEmail").value;
+                                
+                                        // Verificar si el correo electrónico es válido
+                                        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                        if (!emailRegex.test(email)) {
+                                            // Si el correo electrónico no es válido, mostrar un mensaje de error
+                                            document.getElementById("emailError").innerText = "Por favor ingresa un correo electrónico válido.";
+                                            return;
+                                        }
+                                
+                                        // Si el correo electrónico es válido, mostrar el modal de registro enviado
+                                        $('#exampleModal').modal('show');
+                                    }
+                                </script>
+                                
                                 
                             </form>
                         </div>
@@ -201,4 +219,3 @@
 </footer>
 
 </html>
-
