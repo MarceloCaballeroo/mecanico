@@ -23,6 +23,7 @@ Además, el proyecto incluye:
 - Carro de compras con la capacidad de añadir y quitar productos.
 - Formulario de contacto con validación de correo electrónico.
 - Carrusel de imágenes en la página principal.
+- Login especial de administrador con user: admin pass:123
 
 ## Uso
 
