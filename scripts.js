@@ -107,43 +107,43 @@ $(document).ready(function () {
     ];
     var cart = [];
 
-    window.addToCart = function(productId) {
+    // Añade un producto al carro
+    window.addToCart = function (productId) {
         var product = products.find(p => p.id === productId);
         cart.push(product);
         renderCart();
     };
 
+    // Elimina un producto del carro
+    window.removeFromCart = function (index) {
+        cart.splice(index, 1); // Utiliza el índice para quitar el producto específico
+        renderCart();
+    };
 
+    // Muestra los productos en el carro y calcula el total
     function renderCart() {
         $('#cart-items').empty();
         var total = 0;
-        cart.forEach(function(item) {
+        cart.forEach(function (item, index) {
             total += item.price;
-            $('#cart-items').append('<li>' + item.name + ' - $' + item.price.toLocaleString('es-CL') + '</li>');
+            $('#cart-items').append(
+                '<div class="list-group-item d-flex justify-content-between align-items-center">' +
+                item.name + ' - $' + item.price.toLocaleString('es-CL') +
+                '<button class="btn btn-danger btn-sm" onclick="removeFromCart(' + index + ')">Quitar</button>' +
+                '</div>');
         });
         $('#total').text('$' + total.toLocaleString('es-CL'));
     }
-
-    window.addToCart = function(productId) {
-        var product = products.find(p => p.id === productId);
-        cart.push(product);
-        renderCart();
-    };
-
-    function renderCart() {
-        $('#cart-items').empty();
-        cart.forEach(function(item) {
-            $('#cart-items').append('<li>' + item.name + ' - $' + item.price + '</li>');
-        });
-        updateTotal();
-    }
-
-    function updateTotal() {
-        var total = cart.reduce(function(acc, item) {
-            return acc + item.price;
-        }, 0);
-        $('#total').text('$' + total);
-    }
+    // Evento para el botón de Checkout
+    $('#checkout-btn').click(function () {
+        if (cart.length > 0) {
+            alert("Compra realizada con éxito.");
+            cart = [];
+            renderCart();
+        } else {
+            alert("Tu carro está vacío.");
+        }
+    });
 
     renderProducts();
 });
