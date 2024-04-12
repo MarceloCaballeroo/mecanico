@@ -99,4 +99,51 @@ $(document).ready(function () {
         var searchTerm = $('#searchInput').val().trim();
         buscarAutosPorMecanico(searchTerm);
     });
+
+    var products = [
+        { id: 1, name: 'Trabajo 1', price: 100000 },
+        { id: 2, name: 'Trabajo 2', price: 200000 },
+        { id: 3, name: 'Trabajo 3', price: 2000000 }
+    ];
+    var cart = [];
+
+    window.addToCart = function(productId) {
+        var product = products.find(p => p.id === productId);
+        cart.push(product);
+        renderCart();
+    };
+
+
+    function renderCart() {
+        $('#cart-items').empty();
+        var total = 0;
+        cart.forEach(function(item) {
+            total += item.price;
+            $('#cart-items').append('<li>' + item.name + ' - $' + item.price.toLocaleString('es-CL') + '</li>');
+        });
+        $('#total').text('$' + total.toLocaleString('es-CL'));
+    }
+
+    window.addToCart = function(productId) {
+        var product = products.find(p => p.id === productId);
+        cart.push(product);
+        renderCart();
+    };
+
+    function renderCart() {
+        $('#cart-items').empty();
+        cart.forEach(function(item) {
+            $('#cart-items').append('<li>' + item.name + ' - $' + item.price + '</li>');
+        });
+        updateTotal();
+    }
+
+    function updateTotal() {
+        var total = cart.reduce(function(acc, item) {
+            return acc + item.price;
+        }, 0);
+        $('#total').text('$' + total);
+    }
+
+    renderProducts();
 });
